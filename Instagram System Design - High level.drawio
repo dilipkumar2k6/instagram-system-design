@@ -1,1 +1,31 @@
-<mxfile host="app.diagrams.net" modified="2020-11-07T22:56:06.668Z" agent="5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36" version="13.9.2" etag="RdUnr17yAnuPbDtpjQ3G" type="github"><diagram id="OetNqehpfH3lyW26qQmy">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2020-11-07T23:00:48.810Z" agent="5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36" etag="AZ357UgQp1LisYGGStPn" version="13.9.2" type="github">
+  <diagram id="OetNqehpfH3lyW26qQmy" name="Page-1">
+    <mxGraphModel dx="786" dy="439" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Pfn347-1Jo6gLOCdynuy-8" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="160" y="10" width="200" height="390" as="geometry" />
+        </mxCell>
+        <mxCell id="Pfn347-1Jo6gLOCdynuy-6" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="Pfn347-1Jo6gLOCdynuy-8">
+          <mxGeometry width="200" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="Pfn347-1Jo6gLOCdynuy-3" value="App Server" style="rounded=0;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="Pfn347-1Jo6gLOCdynuy-8">
+          <mxGeometry x="40" y="30" width="130" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Pfn347-1Jo6gLOCdynuy-4" value="Image Metadata" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="Pfn347-1Jo6gLOCdynuy-8">
+          <mxGeometry x="70" y="150" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Pfn347-1Jo6gLOCdynuy-5" value="Image Object Storage" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="Pfn347-1Jo6gLOCdynuy-8">
+          <mxGeometry x="9" y="250" width="187" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="Pfn347-1Jo6gLOCdynuy-7" value="Upload Service" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="Pfn347-1Jo6gLOCdynuy-8">
+          <mxGeometry x="50" y="370" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Pfn347-1Jo6gLOCdynuy-9" value="App Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
