@@ -148,6 +148,20 @@ Following is schema to store user and followers
 ```
 GET /users/12324?apiKey&authToken=string&since=datetime&count=int
 ```
+Following is response
+```
+{
+    data: [
+        {
+            photoUrl: int
+        }
+    ],
+    pageInfo: {
+        size: int,
+        hasNext: boolean
+    }
+}
+```
 # ID generation service
 Following are different approach 
 ## Random number
@@ -336,16 +350,36 @@ Following are proposed storage system
 # User timeline service
 ## Feed generation
 - retrieve  all userIds given user follows
+```
+SELECT followUserId
+FROM USER_FOLLOW
+WHERE userId = X
+```
 - Retrieve latest, most popular, and relevant photos for followed userIds. These are potential photos can be shown to user
+```
+SELECT photoId
+FROM PHOTO
+WHERE userId in [followUserId]
+ORDER BY createdAt, likes
+```
 - Rank these photos based on relevance to user. This represent user's current feed
 - Store this feed in the cache and return top photos (say 20) to be rendered on user's timeline
+```
+[
+    {
+        photoId: xx        
+    }
+]
+```
 - Frontend can make paginated api call to fetch next `20` photos
+
 Q. How to update new incoming photos from people user follow?
+
 A: 
 - If user is online, we should have mechanism to rank and add the newer photos to her feed. 
 - We can periodically (say every 5 minutes) perform the above steps to rank and add the newer photos to user's feed.
 - User can be notified about new feed
-
+Note: It will impact pagination logic. Need to solve it.
 ## Feed publishing
 - Whenever user loads her newsfeed page, she has to request and pull feed items from the server. 
 - When she reaches the end of her current feed, she can pull more data from the server. 
@@ -362,15 +396,33 @@ A:
 - Using this scheme, user’s newsfeed is not compiled on load, but rather on a regular basis and returned to users whenever they request for it.
 - Whenever these servers need to generate the feed for a user, they will first query to see what was the last time the feed was generated for that user. 
 - Then, new feed data would be generated from that time onwards. 
+```
+SELECT followUserId
+FROM USER_FOLLOW
+WHERE userId = X
+```
+
+```
+SELECT photoId
+FROM PHOTO
+WHERE userId in [followUserId] AND createdAt >= timestamp
+ORDER BY createdAt, likes
+```
 - We can store this data in a hash table where the “key” would be UserID and “value” would be a STRUCT like this:
 ```
 Struct {
-    LinkedHashMap<FeedItemID, FeedItem> feedItems;
+    LinkedHashMap<photoId, Photo> feedItems;
     DateTime lastGenerated;
 }
 ```
-- We can store FeedItemIDs in a data structure similar to `Linked HashMap` or `TreeMap`, which can allow us to not only jump to any feed item but also iterate through the map easily. 
-- Whenever users want to fetch more feed items, they can send the last FeedItemID they currently see in their newsfeed, we can then jump to that FeedItemID in our hash-map and return next batch/page of feed items from there.
+```
+{
+    <userId>: [{timestamp: datetime, photos: [{photoId: int}] }]
+}
+```
+
+- We can store photoItems in a data structure similar to `Linked HashMap` or `TreeMap`, which can allow us to not only jump to any feed item but also iterate through the map easily. 
+- Whenever users want to fetch more feed items, they can send the last photoId they currently see in their newsfeed, we can then jump to that photoId in our hash-map and return next batch/page of photos items from there.
 ### How many feed items should we store in memory for a user’s feed?
 - Initially, we can decide to store 500 feed items per user, but this number can be adjusted later based on the usage pattern. 
 - For example, if we assume that one page of a user’s feed has 20 photos and most of the users never browse more than ten pages of their feed, we can decide to store only 200 photos per user. 
