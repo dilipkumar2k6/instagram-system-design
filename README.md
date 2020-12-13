@@ -162,6 +162,20 @@ Following is response
     }
 }
 ```
+## Preview/download photo
+```
+GET /photo/<photoId>
+```
+
+# Optimize photo storage
+## What is problem with storage?
+- Given that we have a huge number of files, we have to perform a lot of seeks to different locations on the disk to read these files.
+- This is quite inefficient and will result in higher latencies.
+## Use BigTable or Facebook F4 (needle in haystack)
+- It combines multiple files into one block to store on the disk and is very efficient in reading a small amount of data.
+## Use cache to handle hot photos
+- Keeping hot photos in the cache will also help in improving the latencies and, given that photos files are small in size, we can easily cache a large number of such files in memory.
+
 # ID generation service
 Following are different approach 
 ## Random number
